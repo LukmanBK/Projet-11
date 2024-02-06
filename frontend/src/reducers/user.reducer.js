@@ -2,32 +2,37 @@ import {
   LOGOUT_USER,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+  USER_PROFILE
 } from "../actions/user.actions";
 
 const initialState = {
-  token: null,
   loginError: null,
+  userProfile: "",
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOGOUT_USER:
+      return {
+        ...state,
+        loginError: null,
+        userProfile:"",
+      };
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.payload,
         loginError: null,
       };
     case USER_LOGIN_FAILURE:
       return {
         ...state,
-        token: null,
         loginError: action.payload,
       };
-    case LOGOUT_USER:
+    
+      case USER_PROFILE:
       return {
         ...state,
-        token: null,
-        loginError: null,
+        userProfile: action.payload,
       };
     default:
       return state;
