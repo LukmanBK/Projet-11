@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import HeaderProfile from "../components/HeaderProfile/HeaderProfile";
 import Account from "../components/Account/Account";
 
 const Profile = () => {
+
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+    }, [token, navigate]);
+  
   return (
     <div className="page_account">
       <Navbar />

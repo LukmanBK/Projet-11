@@ -23,9 +23,7 @@ export const loginUser = (email, password, navigate) => {
       if (response.status === 200) {
         const token = response.data.body.token;
         localStorage.setItem("token", token);
-        dispatch(userLoginSuccess(token));
         navigate("/profile");
-        dispatch(userLoginSuccess());
       } else {
         localStorage.removeItem("token");
       }
@@ -49,7 +47,7 @@ export const logoutUser = () => {
 };
 
 // Action de gestion de la connexion reussite de l'utilisateur
-export const userLoginSuccess = (token) => ({
+export const userLoginSuccess = () => ({
   type: USER_LOGIN_SUCCESS,
 });
 
@@ -99,7 +97,7 @@ export const fetchUserProfile = () => {
 // Action de gestion de mise à jour du nom de l'utilisateur
 export const updateUserName = (userName) => {
   return async (dispatch) => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (!token) {
       return;
     }
