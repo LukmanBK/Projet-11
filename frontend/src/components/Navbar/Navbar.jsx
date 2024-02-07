@@ -11,61 +11,60 @@ const Navbar = () => {
   const userProfile = useSelector((state) => state.user.userProfile);
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
+
   const handleSignOut = (e) => {
     e.preventDefault();
     dispatch(logoutUser());
     navigate("/");
   };
- 
+
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
 
-
-if (token) {
-  return (
-    <nav className="main-nav">
-      <NavLink to="/" className="main-nav-logo">
-        <img
-          src={logo}
-          alt="Argent Bank Logo"
-          className="main-nav-logo-image"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </NavLink>
-      <div className="navbar_loginSuccess">
-        <NavLink to="/profile" className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          {userProfile.firstName}
+  if (token) {
+    return (
+      <nav className="main-nav">
+        <NavLink to="/" className="main-nav-logo">
+          <img
+            src={logo}
+            alt="Argent Bank Logo"
+            className="main-nav-logo-image"
+          />
+          <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
-        <NavLink to="/" className="main-nav-item" onClick={handleSignOut}>
-          <i className="fa fa-sign-out"></i>
-          Sign Out
+        <div className="navbar_loginSuccess">
+          <NavLink to="/profile" className="main-nav-item">
+            <i className="fa fa-user-circle"></i>
+            {userProfile.firstName}
+          </NavLink>
+          <NavLink to="/" className="main-nav-item" onClick={handleSignOut}>
+            <i className="fa fa-sign-out"></i>
+            Sign Out
+          </NavLink>
+        </div>
+      </nav>
+    );
+  } else {
+    return (
+      <nav className="main-nav">
+        <NavLink to="/" className="main-nav-logo">
+          <img
+            src={logo}
+            alt="Argent Bank Logo"
+            className="main-nav-logo-image"
+          />
+          <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
-      </div>
-    </nav>
-  );
-} else {
-  return (
-    <nav className="main-nav">
-      <NavLink to="/" className="main-nav-logo">
-        <img
-          src={logo}
-          alt="Argent Bank Logo"
-          className="main-nav-logo-image"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </NavLink>
-      <div>
-        <NavLink to="/login" className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
-          Sign In
-        </NavLink>
-      </div>
-    </nav>
-  );
-}
+        <div>
+          <NavLink to="/login" className="main-nav-item">
+            <i className="fa fa-user-circle"></i>
+            Sign In
+          </NavLink>
+        </div>
+      </nav>
+    );
+  }
 };
 
 export default Navbar;

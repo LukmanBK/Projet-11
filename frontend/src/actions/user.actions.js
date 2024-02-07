@@ -5,6 +5,7 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE";
 export const USER_PROFILE = "USER_PROFILE";
+export const UPDATE_USERNAME = "UPDATE_USERNAME";
 
 // Action de gestion du processus de connexion de l'utilisateur
 export const loginUser = (email, password, navigate) => {
@@ -88,6 +89,39 @@ export const fetchUserProfile = () => {
       if (response.status === 200) {
         const userProfile = response.data.body;
         dispatch(userProfileSuccess(userProfile));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+// Action de gestion de mise à jour du nom de l'utilisateur
+export const updateUserName = (userName) => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      return;
+    }
+
+    try {
+      const response = await axios.put(
+        "http://localhost:3001/api/v1/user/profile",
+        { userName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response);
+
+      if (response.status === 200) {
+        dispatch({
+          type: UPDATE_USERNAME,
+          payload: userName,
+        });
       }
     } catch (error) {
       console.error(error);

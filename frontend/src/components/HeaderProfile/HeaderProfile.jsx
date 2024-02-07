@@ -1,24 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserProfile } from "../../actions/user.actions";
+import EditName from "../EditName/EditName";
 import "./headerProfile.css";
 
 const HeaderProfile = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.user.userProfile);
+  const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
+
   return (
     <div className="header">
-      <>
-        <h1>
-          Welcome back
-          <br />
-          {userProfile.firstName}!
-        </h1>
-        <button className="edit-button">Edit Name</button>
-      </>
+      {isEditing ? (
+        <EditName setIsEditing={setIsEditing} />
+      ) : (
+        <>
+          <h1>
+            Welcome back
+            <br />
+            {userProfile.userName}!
+          </h1>
+          <button className="edit-button" onClick={() => setIsEditing(true)}>
+            Edit Name
+          </button>
+        </>
+      )}
     </div>
   );
 };

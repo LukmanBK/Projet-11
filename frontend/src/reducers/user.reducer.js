@@ -2,7 +2,8 @@ import {
   LOGOUT_USER,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
-  USER_PROFILE
+  USER_PROFILE,
+  UPDATE_USERNAME,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -16,7 +17,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loginError: null,
-        userProfile:"",
+        userProfile: "",
       };
     case USER_LOGIN_SUCCESS:
       return {
@@ -28,11 +29,17 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loginError: action.payload,
       };
-    
-      case USER_PROFILE:
+
+    case USER_PROFILE:
       return {
         ...state,
         userProfile: action.payload,
+      };
+    case UPDATE_USERNAME:
+      const newProfile = { ...state.userProfile, userName: action.payload };
+      return {
+        ...state,
+        userProfile: newProfile,
       };
     default:
       return state;
