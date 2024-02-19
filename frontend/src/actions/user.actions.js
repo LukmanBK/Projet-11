@@ -70,7 +70,6 @@ export const fetchUserProfile = () => {
     if (!token) {
       return;
     }
-
     try {
       const response = await axios.post(
         "http://localhost:3001/api/v1/user/profile",
@@ -101,7 +100,6 @@ export const updateUserName = (userName) => {
     if (!token) {
       return;
     }
-
     try {
       const response = await axios.put(
         "http://localhost:3001/api/v1/user/profile",

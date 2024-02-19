@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/argentBankLogo.png";
+import logo from "../../assets/argentBankLogo.webp";
 import { logoutUser } from "../../actions/user.actions";
 import { fetchUserProfile } from "../../actions/user.actions";
 import "./navbar.css";
