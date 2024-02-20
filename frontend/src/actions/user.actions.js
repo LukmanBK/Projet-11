@@ -18,8 +18,6 @@ export const loginUser = (email, password, navigate) => {
           password: password,
         }
       );
-      console.log(response);
-
       if (response.status === 200) {
         const token = response.data.body.token;
         localStorage.setItem("token", token);
@@ -80,9 +78,6 @@ export const fetchUserProfile = () => {
           },
         }
       );
-
-      console.log(response);
-
       if (response.status === 200) {
         const userProfile = response.data.body;
         dispatch(userProfileSuccess(userProfile));
@@ -110,9 +105,6 @@ export const updateUserName = (userName) => {
           },
         }
       );
-
-      console.log(response);
-
       if (response.status === 200) {
         dispatch({
           type: UPDATE_USERNAME,
