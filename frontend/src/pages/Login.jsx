@@ -5,7 +5,7 @@ import Footer from "../components/Footer/Footer"
 
 const Login = () => {
   return (
-    <div>
+    <div className="page_login">
       <Navbar />
       <Form />
       <Footer />
